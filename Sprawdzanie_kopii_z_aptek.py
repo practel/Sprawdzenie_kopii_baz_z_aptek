@@ -137,11 +137,11 @@ class KatalogAptek:
     def test_kopii_dziennej(self, jaki):
         tworz_komunikat = set()
         lp = 0
-        lista_aptek = katalog.wczytaj_liste_apteki()  # Tworzy listę aptek - lista_aptek
+        lista_aptek = self.wczytaj_liste_apteki()  # Tworzy listę aptek - lista_aptek
         for apteki in lista_aptek:
             #print(apteki)
             if apteki[2] != '':  # jeżeli jest wpisana ścieżka w trzecim polu to sprawdzaj plik
-                wynik1 = katalog.sprawdz_plik(
+                wynik1 = self.sprawdz_plik(
                     sciezka_katalogu=apteki[2], szukany_plik=apteki[3],
                     nazwa_apteki=apteki[1],max_wielkosc_1=apteki[10])
 
@@ -150,7 +150,7 @@ class KatalogAptek:
                 lp = lp + 1
                 tworz_komunikat.add(wynik1)
         #print(tworz_komunikat)
-        katalog.wyslij_email(tworz_komunikat, lp)
+        self.wyslij_email(tworz_komunikat, lp)
 
 def logowanie_zdarzen(zdarzenie):
     with open("logi.log", "a") as logi:
