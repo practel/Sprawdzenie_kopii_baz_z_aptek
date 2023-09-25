@@ -40,6 +40,48 @@ class KatalogAptek:
         except FileNotFoundError:
             print(f"Plik {nazwa_pliku} nie istnieje.")
 
+    def wyslij_email(self, tworz_komunikat, lp):
+        komunikat = ""
+
+        with open("wynik_do_wyslania.txt", "w") as plik:
+            # Iterujemy przez elementy zbioru i zapisujemy je do pliku
+            for element in tworz_komunikat:
+                plik.write(
+                    element + "\n"
+                )  # Dodajemy znak nowej linii po każdym elemencie
+            lp = str(lp)
+            plik.write(lp + "\n")
+        # Otwarcie pliku "wynik_do_wyslania.txt" i odczytanie jego zawartości
+        with open("wynik_do_wyslania.txt", "r") as plik:
+            komunikat = plik.read()
+
+        # Dane konta e-mail nadawcy
+        nadawca_email = "raporty_klient@poczta.pl"
+        nadawca_haslo = "Practel123"
+
+        # Dane konta e-mail odbiorcy
+        odbiorca_email = "practel@gmail.com"
+
+        # Tworzenie wiadomości e-mail
+        wiadomosc = MIMEMultipart()
+        wiadomosc["From"] = nadawca_email
+        wiadomosc["To"] = odbiorca_email
+        wiadomosc["Subject"] = "Raport poprawmosci kopii baz z aptek"
+
+        tresc = komunikat
+        wiadomosc.attach(MIMEText(tresc, "plain"))
+
+        # Nawiązanie połączenia z serwerem SMTP
+        serwer_smtp = smtplib.SMTP("smtp.poczta.pl", 587)
+        serwer_smtp.starttls()
+        serwer_smtp.login(nadawca_email, nadawca_haslo)
+
+        # Wysłanie wiadomości e-mail
+        serwer_smtp.sendmail(nadawca_email, odbiorca_email, wiadomosc.as_string())
+        logowanie_zdarzen(zdarzenie=" - wyslano e-maila")
+        # Zamknięcie połączenia
+        serwer_smtp.quit()
+
     def sprawdz_plik(self, sciezka_katalogu,szukany_plik,nazwa_apteki,max_wielkosc_1):
         dzisiejsza_data = datetime.date.today()
         wynikjest = []
@@ -93,6 +135,8 @@ class KatalogAptek:
             lista_aptek.append(pojedyncza_apteka)
         return lista_aptek
     def test_kopii_dziennej(self, jaki):
+        tworz_komunikat = set()
+        lp = 0
         lista_aptek = katalog.wczytaj_liste_apteki()  # Tworzy listę aptek - lista_aptek
         for apteki in lista_aptek:
             #print(apteki)
@@ -103,26 +147,43 @@ class KatalogAptek:
 
             if wynik1.startswith(jaki):
                 print(wynik1)
-                pass
+                lp = lp + 1
+                tworz_komunikat.add(wynik1)
+        #print(tworz_komunikat)
+        katalog.wyslij_email(tworz_komunikat, lp)
 
-    def start(self):
-        katalog.wczytaj_apteki_z_pliku()
-        #lista_aptek = katalog.wczytaj_liste_apteki()  # Tworzy listę aptek - lista_aptek
-        while True:
-            print('1 - Pokaż apteki bez kopii dziennej')
-            print('2 - Pokaż apteki z poprawną kopią')
-            wybor = input(f'Podaj opcje: ')
-            if wybor == "0":
-                break
-            elif wybor == "1":
-                jaki = "Brak"
-                katalog.test_kopii_dziennej(jaki)
-            elif wybor == '2':
-                jaki = "OK"
-                katalog.test_kopii_dziennej(jaki)
+def logowanie_zdarzen(zdarzenie):
+    with open("logi.log", "a") as logi:
+        teraz = datetime.datetime.now()
+        teraz = str(teraz.strftime("%Y-%m-%d %H:%M:%S"))
+        logi.write(teraz + zdarzenie + "\n")
+def wczytaj_parametry(nazwa_pliku):
+    try:
+        with open(nazwa_pliku, "r") as plik:
+            for linia in plik:
+                czesci = linia.split(",")
+                if len(czesci) == 2:
+                    godzina_testu, dzien_tygodnia = czesci
+        return godzina_testu, dzien_tygodnia
+    except FileNotFoundError:
+        print(f"Plik {nazwa_pliku} nie istnieje.")
+
+def uruchom(start, dzien_tygodnia):
+    logowanie_zdarzen(zdarzenie=" - uruchomienie")
+    katalog = KatalogAptek()
+    katalog.wczytaj_apteki_z_pliku()
+    dzisiejsza_data_i_godzina = datetime.datetime.now()
+    godzina = dzisiejsza_data_i_godzina.strftime("%H:%M")
+    numer_dnia_tygodnia = dzisiejsza_data_i_godzina.weekday()
+    jaki = "Brak"
+    logowanie_zdarzen(zdarzenie=" - uruchomienie testu")
+    katalog.test_kopii_dziennej(jaki)
+    time.sleep(30)
+
 
 # Program do weryfikacji wysyłania kopii bazy
 if __name__ == "__main__":
-    katalog = KatalogAptek()
-    katalog.start()
+    parametry_pobrane = wczytaj_parametry("dane.ini")
+    uruchom(parametry_pobrane[0], parametry_pobrane[1])
+
 
