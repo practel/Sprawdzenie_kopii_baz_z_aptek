@@ -5,10 +5,11 @@ import servicemanager
 import Sprawdzanie_kopii_z_aptek
 import sys
 import time
+from datetime import datetime
 
-class SprRecept(win32serviceutil.ServiceFramework):
-    _svc_name_ = 'SprRecept'
-    _svc_display_name_ = 'SprRecept'
+class SprKopii(win32serviceutil.ServiceFramework):
+    _svc_name_ = 'SprKopii'
+    _svc_display_name_ = 'SprKopii'
 
     def __init__(self, args):
         win32serviceutil.ServiceFramework.__init__(self, args)
@@ -40,8 +41,8 @@ class SprRecept(win32serviceutil.ServiceFramework):
 if __name__ == '__main__':
     if len(sys.argv) == 1:
         servicemanager.Initialize()
-        servicemanager.PrepareToHostSingle(SprRecept)
+        servicemanager.PrepareToHostSingle(SprKopii)
         servicemanager.StartServiceCtrlDispatcher()
     else:
         sys.frozen = 'windows_exe'  # Easier debugging
-        win32serviceutil.HandleCommandLine(SprRecept)
+        win32serviceutil.HandleCommandLine(SprKopii)

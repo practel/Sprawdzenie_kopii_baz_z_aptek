@@ -175,9 +175,11 @@ def uruchom(start, dzien_tygodnia):
     dzisiejsza_data_i_godzina = datetime.datetime.now()
     godzina = dzisiejsza_data_i_godzina.strftime("%H:%M")
     numer_dnia_tygodnia = dzisiejsza_data_i_godzina.weekday()
-    jaki = "Brak"
-    logowanie_zdarzen(zdarzenie=" - uruchomienie testu")
-    katalog.test_kopii_dziennej(jaki)
+
+    if godzina == start:
+        jaki = "Brak"
+        logowanie_zdarzen(zdarzenie=" - uruchomienie testu")
+        katalog.test_kopii_dziennej(jaki)
     time.sleep(30)
 
 

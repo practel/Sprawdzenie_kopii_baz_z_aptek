@@ -1,16 +1,15 @@
-Brak Blad wieklosci pliku ProchnikaDrogeria plik: poziom0_4.7z ma 98295074 poprzedni mial 133929218 -26.61
-Brak Blad wieklosci pliku PrimulaLegionow plik: poziom0_3.7z ma 0 poprzedni mial 1436106723 -100.0
-Brak Blad wieklosci pliku Rozprza plik: poziom0_5.7z ma 303882566 poprzedni mial 708230530 -57.09
-Brak kopii Moszczenica plik: poziom0_1.7z ma 16 dni 
 Brak kopii Ozorkow2 plik: poziom0_5.7z ma 1 dni 
-Brak Blad wieklosci pliku Podd_Mickiewicza plik: poziom0_5.7z ma 79663104 poprzedni mial 1343595954 -94.07
-Brak kopii Lowicz plik: poziom0_2.7z ma 1 dni 
-Brak kopii Reczno plik: poziom0_1.7z ma 1 dni 
-Brak Blad wieklosci pliku Pajeczno plik: poziom0_2.7z ma 82325504 poprzedni mial 1922827778 -95.72
-Brak kopii Aleksandrow_Klim plik: poziom0_5.7z ma 3 dni 
-Brak kopii Zarzewska plik: poziom0_1.7z ma 1 dni 
-Brak kopii Brzezinska plik: poziom0_6.7z ma 295 dni 
-Brak kopii Drzewica plik: poziom0_1.7z ma 1 dni 
-Brak kopii Flora3 plik: poziom0_2.7z ma 1 dni 
 Brak kopii Gowarczow plik: poziom0_1.7z ma 20 dni 
-15
+Brak kopii Zarzewska plik: poziom0_1.7z ma 1 dni 
+Brak kopii Lowicz plik: poziom0_2.7z ma 1 dni 
+Brak kopii Moszczenica plik: poziom0_1.7z ma 16 dni 
+Brak Blad wieklosci pliku Podd_Mickiewicza plik: poziom0_5.7z ma 215240704 poprzedni mial 1343595954 -83.98
+Brak kopii Reczno plik: poziom0_1.7z ma 1 dni 
+Brak kopii Drzewica plik: poziom0_1.7z ma 1 dni 
+Brak kopii Aleksandrow_Klim plik: poziom0_5.7z ma 3 dni 
+Brak Blad wieklosci pliku Rozprza plik: poziom0_5.7z ma 405567158 poprzedni mial 708230530 -42.74
+Brak Blad wieklosci pliku Pajeczno plik: poziom0_2.7z ma 217903104 poprzedni mial 1922827778 -88.67
+Brak Blad wieklosci pliku PrimulaLegionow plik: poziom0_3.7z ma 0 poprzedni mial 1436106723 -100.0
+Brak kopii Flora3 plik: poziom0_2.7z ma 1 dni 
+Brak kopii Brzezinska plik: poziom0_6.7z ma 295 dni 
+14
